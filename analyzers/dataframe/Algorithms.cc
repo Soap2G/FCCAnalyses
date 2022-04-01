@@ -172,6 +172,21 @@ ROOT::VecOps::RVec<float> Algorithms::minimize_thrust::operator()(ROOT::VecOps::
   result.push_back(xs[2]);
   result.push_back(xs_err[2]);
   
+  /*int v2 = rand() % 100 + 1;
+  if ( v2 % 2 == 0){
+	  result.at(1)=result.at(1)*-1;
+	  result.at(3)=result.at(3)*-1;
+	  result.at(5)=result.at(5)*-1;
+  }*/
+  
+  // EVT_thrust_cos SETUP
+  double pog = result.at(5) / TMath::Sqrt(result.at(1)*result.at(1)+result.at(3)*result.at(3)+result.at(5)*result.at(5));
+  //result.at(7) = pog; 
+  //pog = TMath::Sin(TMath::ACos(pog));
+  result.push_back(pog);
+  //std::cout << "cos theta thrust " << result.at(7) <<std::endl;
+  
+  pog=0;
   delete min;
   return result;
 }
@@ -311,5 +326,13 @@ ROOT::VecOps::RVec<float> Algorithms::getThrustPointing(ROOT::VecOps::RVec<float
   thrust.at(1)=thrust.at(1)*direction*dir;
   thrust.at(3)=thrust.at(3)*direction*dir;
   thrust.at(5)=thrust.at(5)*direction*dir;
+  // EVT_thrust_cos SETUP
+  if (thrust.at(3)>=0){
+    thrust.at(7) = thrust.at(5) / TMath::Sqrt(thrust.at(1)*thrust.at(1)+thrust.at(3)*thrust.at(3)+thrust.at(5)*thrust.at(5));
+  }
+  else{
+    thrust.at(7) = -thrust.at(5) / TMath::Sqrt(thrust.at(1)*thrust.at(1)+thrust.at(3)*thrust.at(3)+thrust.at(5)*thrust.at(5));
+  }
+  
   return thrust;
 }
