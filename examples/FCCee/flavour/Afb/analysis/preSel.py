@@ -3,8 +3,8 @@
 from config.common_defaults import deffccdicts
 import os
 
-#basedir=os.path.join(os.getenv('FCCDICTSDIR', deffccdicts), '') + "yaml/FCCee/spring2021/IDEA/"
-basedir="/afs/cern.ch/user/g/gguerrie/FCC/FCCAnalyses/"
+basedir=os.path.join(os.getenv('FCCDICTSDIR', deffccdicts), '') + "yaml/FCCee/spring2021/IDEA/"
+
 outdir="/eos/home-g/gguerrie/public/outputs/FCCee/flavour/generic-analysis/test_new_evt_batch/"
 
 import multiprocessing
